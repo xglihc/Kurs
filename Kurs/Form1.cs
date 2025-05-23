@@ -88,7 +88,7 @@ namespace Kurs
                 body += "\"GName\": \"" + groupInstance.GName + "\",";
                 body += "\"Head\": \"" + groupInstance.Head + "\",";
             }
-            else if(node.Tag is Kurs.Person personInstance)
+            else if (node.Tag is Kurs.Person personInstance)
             {
                 body += "\"FullName\": \"" + personInstance.FullName + "\",";
                 body += "\"BirthDate\": \"" + personInstance.BirthDate.ToString("yyyy-MM-dd HH:mm:ss") + "\",";
@@ -308,6 +308,29 @@ namespace Kurs
         private void newToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             treeView1.Nodes.Clear();
+        }
+
+        private void treeView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point point = new Point(e.X, e.Y);
+
+            TreeNode nodeAtPoint = treeView1.HitTest(point).Node;
+
+            if (nodeAtPoint == null)
+            {
+                treeView1.SelectedNode = null;
+                propertyGrid.SelectedObject = null;
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            treeView1_MouseDown(sender, e);
         }
     }
 }
